@@ -61,7 +61,9 @@ public final class PersonWarehouse implements Iterable<Person> {
      * @return a Stream of respective
      */ //TODO
     public Stream<Person> getUniquelyNamedPeopleStartingWith(Character character) {
-        return null;
+
+        return people.stream().filter(person -> person.getName().startsWith(String.valueOf(character)));
+
     }
 
     /**
@@ -69,14 +71,18 @@ public final class PersonWarehouse implements Iterable<Person> {
      * @return a Stream of respective
      */ //TODO
     public Stream<Person> getFirstNUniquelyNamedPeople(int n) {
-        return null;
+
+        return getUniquelyNamedPeople()
+                .limit(n);
     }
 
     /**
      * @return a mapping of Person Id to the respective Person name
      */ // TODO
     public Map<Long, String> getIdToNameMap() {
-        return null;
+        return people.stream()
+                .collect(Collectors.toMap(Person::getPersonalId, Person::getName))
+                ;
     }
 
 
